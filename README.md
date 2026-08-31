@@ -1,5 +1,9 @@
 # ZhuaTech Billing｜知华科技企业计费与应收管理系统
 
+## 企业级增强：账单批次开票治理
+
+新增计量、价格、税务、重复风险、客户主数据、期间、贷项和收入复核门禁，详见 [账单批次治理](docs/ENTERPRISE_BILLING_RUN_RELEASE.md)。
+
         > 从计费规则、账单、开票到收款核销形成完整收入链路。
 
         [![Java 21](https://img.shields.io/badge/Java-21-315a70)](backend/pom.xml) [![Vue 3](https://img.shields.io/badge/Vue-3-42b883)](frontend/package.json) [![MySQL 8](https://img.shields.io/badge/MySQL-8-4479a1)](compose.yaml) [![个人非商用](https://img.shields.io/badge/license-personal%20non--commercial-b47b3a)](LICENSE)
