@@ -13,6 +13,7 @@ Base URL：`http://localhost:8080/api`。公开接口无需认证，其余接口
 | DELETE | `/records/{id}` | 删除初始状态记录 |
 | POST | `/records/{id}/actions` | 执行业务状态流转并校验前置状态 |
 | POST | `/insights/billing` | 账单税额与应收计算 |
+| POST | `/advanced/billing/rate` | 执行套餐内免费量、阶梯用量、固定费和税额计算 |
 | GET | `/admin/audit-logs` | 查询最近 100 条操作日志 |
 | GET/PUT | `/admin/settings` | 查询或更新持久化系统参数 |
 
