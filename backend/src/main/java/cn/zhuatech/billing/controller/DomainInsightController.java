@@ -5,8 +5,17 @@ import cn.zhuatech.billing.service.DomainInsightService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import java.util.Map;
+/**
+ * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+ */
 @RestController @RequestMapping("/api/insights")
 public class DomainInsightController {
-    private final DomainInsightService service;public DomainInsightController(DomainInsightService service){this.service=service;}
+    private final DomainInsightService service;/**
+                                                * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+                                                */
+public DomainInsightController(DomainInsightService service){this.service=service;}
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @PostMapping("/billing") ApiResponse<Map<String,Object>> analyze(@Valid @RequestBody DomainInsightService.InsightRequest request){return ApiResponse.ok(service.analyze(request));}
 }

@@ -10,18 +10,30 @@ import java.util.regex.Pattern;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+/**
+ * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+ */
 @SpringBootTest @AutoConfigureMockMvc
 class BillingApiIntegrationTests {
     @Autowired MockMvc mvc;
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @Test void publicMetadataAndSecurityAreCorrect() throws Exception {
         mvc.perform(get("/api/public/about")).andExpect(status().isOk()).andExpect(jsonPath("$.data.company").value("上海如静知华信息科技有限公司"));
         mvc.perform(get("/api/dashboard")).andExpect(status().isUnauthorized());
     }
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @Test void catalogDashboardAndAllModulesAreAvailable() throws Exception {
         mvc.perform(get("/api/catalog").with(httpBasic("operator","operator123"))).andExpect(status().isOk()).andExpect(jsonPath("$.data.modules.length()").value(4));
         mvc.perform(get("/api/dashboard").with(httpBasic("operator","operator123"))).andExpect(status().isOk()).andExpect(jsonPath("$.data.totalRecords").isNumber());
         mvc.perform(get("/api/records?module=PRICING").with(httpBasic("operator","operator123"))).andExpect(status().isOk()).andExpect(jsonPath("$.data").isArray());
     }
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @Test void recordCanFollowPrimaryWorkflowAndWritesAudit() throws Exception {
         var result=mvc.perform(post("/api/records").with(httpBasic("operator","operator123")).contentType(MediaType.APPLICATION_JSON).content("""
             {"recordNo":"UT-BIL-001","module":"PRICING","title":"自动化流程验收记录","businessParty":"知华测试组织","owner":"测试专员","amount":12800,"quantity":3,"dueDate":"2026-09-30","riskLevel":"正常","description":"主要流程自动化测试"}
@@ -35,6 +47,9 @@ class BillingApiIntegrationTests {
             .andExpect(status().isOk()).andExpect(jsonPath("$.data.status").value("已开票"));
         mvc.perform(get("/api/admin/audit-logs").with(httpBasic("admin","admin123"))).andExpect(status().isOk()).andExpect(jsonPath("$.data.length()").isNotEmpty());
     }
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @Test void draftRecordCanBeUpdatedAndDeleted() throws Exception {
         var result=mvc.perform(post("/api/records").with(httpBasic("operator","operator123")).contentType(MediaType.APPLICATION_JSON).content("""
             {"recordNo":"UT-BIL-002","module":"PRICING","title":"待修改记录","businessParty":"测试部门","owner":"测试员","amount":1000,"quantity":1,"dueDate":"2026-10-10","riskLevel":"正常","description":"用于验证增删改"}
@@ -45,6 +60,9 @@ class BillingApiIntegrationTests {
             """)).andExpect(status().isOk()).andExpect(jsonPath("$.data.title").value("已修改记录"));
         mvc.perform(delete("/api/records/{id}",id).with(httpBasic("operator","operator123"))).andExpect(status().isOk());
     }
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @Test void onlyAdminCanMaintainPersistentSettings() throws Exception {
         mvc.perform(get("/api/admin/settings").with(httpBasic("operator","operator123"))).andExpect(status().isForbidden());
         mvc.perform(put("/api/admin/settings").with(httpBasic("admin","admin123")).contentType(MediaType.APPLICATION_JSON).content("{\"acceptanceMode\":\"自动化测试\"}"))

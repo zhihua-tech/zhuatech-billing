@@ -6,7 +6,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+/**
+ * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+ */
 @Configuration public class DataInitializer {
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     @Bean CommandLineRunner seed(BusinessRecordRepository records,SystemSettingRepository settings){return args->{
         if(records.count()>0)return;
             settings.save(new SystemSetting("currency","CNY"));

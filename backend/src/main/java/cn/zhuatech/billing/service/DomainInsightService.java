@@ -6,8 +6,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import java.math.*;
 import java.util.*;
+/**
+ * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+ */
 @Service
 public class DomainInsightService {
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public Map<String,Object> analyze(InsightRequest req){
         Map<String,Object> result=new LinkedHashMap<>();
         BigDecimal listAmount=req.quantity().multiply(req.unitPrice());BigDecimal subtotal=listAmount.multiply(BigDecimal.ONE.subtract(req.discountRate())).setScale(2,RoundingMode.HALF_UP);
@@ -15,6 +21,12 @@ BigDecimal tax=subtotal.multiply(req.taxRate()).setScale(2,RoundingMode.HALF_UP)
 result.put("subtotal",subtotal);result.put("tax",tax);result.put("total",total);result.put("outstanding",outstanding);result.put("decision",outstanding.signum()==0?"SETTLED":req.paidAmount().signum()>0?"PARTIAL":"UNPAID");
         return result;
     }
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     private BigDecimal rate(long numerator,long denominator){return denominator==0?BigDecimal.ZERO:BigDecimal.valueOf(numerator).multiply(BigDecimal.valueOf(100)).divide(BigDecimal.valueOf(denominator),2,RoundingMode.HALF_UP);}
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record InsightRequest(@Positive BigDecimal quantity, @DecimalMin("0.0") BigDecimal unitPrice, @DecimalMin("0.0") @DecimalMax("1.0") BigDecimal discountRate, @DecimalMin("0.0") @DecimalMax("1.0") BigDecimal taxRate, @DecimalMin("0.0") BigDecimal paidAmount){}
 }

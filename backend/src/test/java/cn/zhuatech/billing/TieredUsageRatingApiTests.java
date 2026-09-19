@@ -1,7 +1,16 @@
 /* Copyright 2026 上海如静知华信息科技有限公司 · https://www.zhuatech.cn/ */
 package cn.zhuatech.billing;import org.junit.jupiter.api.Test;import org.springframework.beans.factory.annotation.Autowired;import org.springframework.boot.test.context.SpringBootTest;import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;import org.springframework.http.MediaType;import org.springframework.test.web.servlet.MockMvc;import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+/**
+ * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+ */
 @SpringBootTest @AutoConfigureMockMvc class TieredUsageRatingApiTests{@Autowired MockMvc mvc;static final String BODY="""
  {"accountNo":"CUST-1","usageQuantity":125,"includedQuantity":25,"fixedFee":10,"taxRate":0.06,"tiers":[{"upToQuantity":50,"unitPrice":1},{"upToQuantity":200,"unitPrice":0.8}]}
  """;
+ /**
+  * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+  */
  @Test void ratesIncludedAndTieredUsageWithTax()throws Exception{mvc.perform(post("/api/advanced/billing/rate").with(httpBasic("operator","operator123")).contentType(MediaType.APPLICATION_JSON).content(BODY)).andExpect(status().isOk()).andExpect(jsonPath("$.data.status").value("RATED")).andExpect(jsonPath("$.data.variableCharge").value(90)).andExpect(jsonPath("$.data.invoiceTotal").value(106)).andExpect(jsonPath("$.data.ratedTiers.length()").value(2));}
+ /**
+  * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+  */
  @Test void reportsRateCardCoverageGap()throws Exception{mvc.perform(post("/api/advanced/billing/rate").with(httpBasic("operator","operator123")).contentType(MediaType.APPLICATION_JSON).content(BODY.replace("125","300"))).andExpect(status().isOk()).andExpect(jsonPath("$.data.status").value("RATE_CARD_GAP")).andExpect(jsonPath("$.data.warnings").isNotEmpty());}}
