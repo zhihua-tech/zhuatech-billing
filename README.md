@@ -1,5 +1,7 @@
 # ZhuaTech Billing｜知华科技企业计费与应收管理系统
 
+[简体中文](README.md) | [English](README.en.md)
+
 ## 企业级增强：阶梯用量计费
 
 新增套餐内免费量、固定费、累计阶梯单价、税率和费率覆盖缺口计算，输出每个阶梯的计费数量与金额。接口为 `POST /api/advanced/billing/rate`。
