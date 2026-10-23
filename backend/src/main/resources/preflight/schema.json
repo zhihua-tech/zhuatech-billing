@@ -1,0 +1,88 @@
+{
+  "slug": "billing",
+  "title": "账单税额与收款余额预检",
+  "fields": [
+    {
+      "key": "bill_no",
+      "label": "账单编号",
+      "type": "ID",
+      "length": 200
+    },
+    {
+      "key": "net",
+      "label": "未税金额",
+      "type": "DECIMAL",
+      "length": 200,
+      "scale": 2
+    },
+    {
+      "key": "tax",
+      "label": "税额",
+      "type": "DECIMAL",
+      "length": 200,
+      "scale": 2
+    },
+    {
+      "key": "gross",
+      "label": "含税金额",
+      "type": "DECIMAL",
+      "length": 200,
+      "scale": 2
+    },
+    {
+      "key": "received",
+      "label": "已收款",
+      "type": "DECIMAL",
+      "length": 200,
+      "scale": 2
+    },
+    {
+      "key": "outstanding",
+      "label": "未收余额",
+      "type": "DECIMAL",
+      "length": 200,
+      "scale": 2
+    }
+  ],
+  "unique": [
+    [
+      "bill_no"
+    ]
+  ],
+  "rules": [
+    {
+      "op": "SUM_EQ",
+      "args": [
+        "net",
+        "tax",
+        "gross"
+      ],
+      "code": "BILL_TOTAL",
+      "message": "未税金额加税额必须等于含税金额",
+      "bad": {
+        "tax": "12"
+      }
+    },
+    {
+      "op": "SUM_EQ",
+      "args": [
+        "received",
+        "outstanding",
+        "gross"
+      ],
+      "code": "BILL_BALANCE",
+      "message": "已收款加未收余额必须等于账单金额",
+      "bad": {
+        "outstanding": "12"
+      }
+    }
+  ],
+  "sampleCsv": "bill_no,net,tax,gross,received,outstanding\nBILL-001,100,13,113,100,13\n",
+  "limits": {
+    "rows": 500,
+    "bytes": 262144,
+    "columns": 32,
+    "cellCharacters": 4000
+  },
+  "scope": "Read-only batch validation; no persistence, reference-master lookup or full production certification."
+}
