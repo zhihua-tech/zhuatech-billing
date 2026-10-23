@@ -1,0 +1,64 @@
+[
+  {
+    "patch": {},
+    "expected": {
+      "decision": "REVIEW",
+      "periodDays": "#31",
+      "activeDays": "#16",
+      "proratedFee": "#160",
+      "candidateBill": "#150"
+    },
+    "error": false
+  },
+  {
+    "patch": {
+      "approvedCredit": "161"
+    },
+    "expected": {
+      "decision": "HOLD",
+      "creditOverage": "#1"
+    },
+    "error": false
+  },
+  {
+    "patch": {
+      "activationDate": "2026-11-01",
+      "approvedCredit": "0"
+    },
+    "expected": {
+      "activeDays": "#0",
+      "candidateBill": "#0"
+    },
+    "error": false
+  },
+  {
+    "patch": {
+      "activationDate": "2026-09-01"
+    },
+    "expected": {
+      "activeDays": "#31"
+    },
+    "error": false
+  },
+  {
+    "patch": {
+      "periodEnd": "2026-09-30"
+    },
+    "expected": {},
+    "error": true
+  },
+  {
+    "patch": {
+      "periodStart": "2024-02-01",
+      "periodEnd": "2024-02-29",
+      "activationDate": "2024-02-29",
+      "fullPeriodFee": "290",
+      "approvedCredit": "0"
+    },
+    "expected": {
+      "periodDays": "#29",
+      "proratedFee": "#10"
+    },
+    "error": false
+  }
+]
